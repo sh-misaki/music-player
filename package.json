@@ -13,8 +13,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@zeit/next-typescript": "^1.1.1",
+    "fork-ts-checker-webpack-plugin": "^1.0.1",
     "next": "^8.0.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "@types/react": "^16.8.12",
+    "ts-loader": "^5.3.3",
+    "typescript": "^3.4.1"
   }
 }
