@@ -7,6 +7,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
+    "lint": "tslint -c tslint.json 'components/**/*.ts{,x}'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -22,6 +23,7 @@
   "devDependencies": {
     "@types/react": "^16.8.12",
     "ts-loader": "^5.3.3",
+    "tslint": "^5.15.0",
     "typescript": "^3.4.1"
   }
 }
