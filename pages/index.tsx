@@ -5,14 +5,20 @@ interface IProps {
   test: string;
 }
 
-export default class TopContainer extends React.Component<IProps> {
-  private static getInitialProps({ req }) {
-    const hash = !req ? window.location.hash : "";
-    return { hash };
-  }
+interface IState {
+  hash: string;
+}
+
+export default class TopContainer extends React.Component<IProps, IState> {
+  public state: IState = {
+    hash: "",
+  };
 
   private componentDidMount() {
     const hashString = window.location.hash.split("&")[0].split("=")[1];
+    this.setState({
+      hash: hashString,
+    });
   }
 
   private render() {
@@ -20,8 +26,7 @@ export default class TopContainer extends React.Component<IProps> {
     const clientId = "a1bd0a2ad2ce41edb109fdcc95206aea";
     const redirectUri = "http:%2F%2Flocalhost:3000%2F";
     const scope = "user-read-private%20user-read-email";
-
-    const { hash } = this.props;
+    const { hash } = this.state;
 
     return (
       <div>
