@@ -1,11 +1,11 @@
-import * as React from 'react';
+import * as React from "react";
 
-interface Props {
+interface IProps {
   label: string;
   onClick: () => void;
 }
 
-const Button = (props: Props) => (
+const Button = (props: IProps) => (
   <button onClick={props.onClick}>{props.label}</button>
 );
 
