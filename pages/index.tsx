@@ -1,5 +1,5 @@
 import * as React from "react";
-import Button from "../components/button";
+import Button from "../components/atoms/Button";
 import axios from "axios";
 import cookies from "next-cookies";
 
@@ -62,7 +62,7 @@ export default class TopContainer extends React.Component<IProps, IState> {
     return (
       <div>
         {
-          false && (
+          true && (
             <a href={
               `${loginUri}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=token&state=123`
             }>
