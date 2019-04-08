@@ -1,4 +1,7 @@
 {
+  "plugins": [
+    "styled-jsx/babel"
+  ],
   "presets": [
     "next/babel",
     "@zeit/next-typescript/babel"
