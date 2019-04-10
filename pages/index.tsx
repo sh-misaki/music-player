@@ -1,50 +1,78 @@
 import * as React from "react";
-import Button from "../components/button";
-import axios from "axios";
-import cookies from "next-cookies";
+
+import { CurryList } from "../components/organisms/CurryList";
+import { MainTitle, MainContent } from "../styled/Page";
 
 interface IProps {
-  test: string;
+  curries: ICurry[];
 }
 
-interface IState {
-  hash: string;
+interface ICurry {
+  id: number;
+  name: string;
+  imageUrl: string;
 }
 
-export default class TopContainer extends React.Component<IProps, IState> {
-  public state: IState = {
-    hash: "",
-  };
+export default class BlogsPage extends React.Component<IProps> {
+  protected static async getInitialProps() {
+    try {
+      // const response = await fetch('https://??????.???/curries/india');
+      // const json = await response.json();
 
-  private async componentDidMount() {
-    const hashString = window.location.hash.split("&")[0].split("=")[1];
-    this.setState({
-      hash: hashString,
-    });
+      // 通常では上記のように外部APIサーバーに対してデータを取得しにいきますが、今回は簡潔に済ますために
+      // static async getInitialProps() で直接データを returnすることにします。
+      // 下記のデータがAPIサーバーから返ってくると想定して、進めます。
+      // 画像はpixabay様の著作権フリー・帰属表示不要の画像を使っています。
+      // https://pixabay.com/ja/
+      const json: ICurry[] = [
+        {
+          id: 1,
+          name: "Curry1",
+          imageUrl: "/static/curry1.jpg"
+        },
+        {
+          id: 2,
+          name: "Curry2",
+          imageUrl: "/static/curry2.jpg"
+        },
+        {
+          id: 3,
+          name: "Curry3",
+          imageUrl: "/static/curry3.jpg"
+        },
+        {
+          id: 4,
+          name: "Curry4",
+          imageUrl: "/static/curry4.jpg"
+        },
+        {
+          id: 5,
+          name: "Curry5",
+          imageUrl: "/static/curry5.jpg"
+        },
+        {
+          id: 6,
+          name: "Curry6",
+          imageUrl: "/static/curry6.jpg"
+        }
+      ];
 
-    const res = await axios({
-      headers: {
-        Authorization: `Bearer ${hashString}`,
-      },
-      method: "get",
-      url: "https://api.spotify.com/v1/me",
-    });
+      return {
+        curries: json
+      };
+    } catch (e) {
+      return {
+        curries: []
+      };
+    }
   }
 
-  private render() {
-    const loginUri = "https://accounts.spotify.com/authorize";
-    const clientId = "a1bd0a2ad2ce41edb109fdcc95206aea";
-    const redirectUri = "http:%2F%2Flocalhost:3000%2F";
-    const scope = "user-read-private%20user-read-email";
-
+  public render() {
     return (
-      <div>
-        <a href={
-          `${loginUri}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=token&state=123`
-        }>
-          <Button label="ログイン"/>
-        </a>
-      </div>
+      <MainContent>
+        <MainTitle>Indian Curries</MainTitle>
+        <CurryList curries={this.props.curries} />
+      </MainContent>
     );
   }
 }
