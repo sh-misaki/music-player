@@ -3,6 +3,9 @@ import * as React from "react";
 import { CurryList } from "../components/organisms/CurryList";
 import { MainTitle, MainContent } from "../styled/Page";
 
+import { loadData, startClock, tickClock } from "../stores/actions";
+import Page from "../components/containers";
+
 interface IProps {
   curries: ICurry[];
 }
@@ -14,7 +17,14 @@ interface ICurry {
 }
 
 export default class BlogsPage extends React.Component<IProps> {
-  protected static async getInitialProps() {
+  protected static async getInitialProps(props) {
+    const { store, isServer } = props.ctx;
+    store.dispatch(tickClock(isServer));
+
+    if (!store.getState().placeholderData) {
+      store.dispatch(loadData());
+    }
+
     try {
       // const response = await fetch('https://??????.???/curries/india');
       // const json = await response.json();
@@ -58,21 +68,20 @@ export default class BlogsPage extends React.Component<IProps> {
       ];
 
       return {
-        curries: json
+        curries: json,
+        isServer,
+        dispatch: store.dispatch,
       };
     } catch (e) {
       return {
-        curries: []
+        curries: [],
+        isServer,
+        dispatch: store.dispatch,
       };
     }
   }
 
   public render() {
-    return (
-      <MainContent>
-        <MainTitle>Indian Curries</MainTitle>
-        <CurryList curries={this.props.curries} />
-      </MainContent>
-    );
+    return <Page title="Index Page" linkTo="/other" NavigateTo="Other Page" />;
   }
 }
