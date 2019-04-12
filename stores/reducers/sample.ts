@@ -1,10 +1,11 @@
 import { INCREMENT, DECREMENT } from "../actions/sample";
+import { Action } from "redux";
 
 const initialState = {
   count: 0
 };
 
-export function counterReducer(state = initialState, action) {
+export function counterReducer(state = initialState, action: Action) {
   switch (action.type) {
     case INCREMENT:
       return {
