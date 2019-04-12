@@ -1,19 +1,24 @@
 import React from "react";
 
-const pad = (n) => (n < 10 ? `0${n}` : n);
+export interface IClockProps {
+  lastUpdate: string | number;
+  light?: boolean;
+}
 
-const format = (t) => {
+const pad = (n: number) => (n < 10 ? `0${n}` : n);
+
+const format = (t: Date) => {
   const hours = t.getUTCHours();
   const minutes = t.getUTCMinutes();
   const seconds = t.getUTCSeconds();
   return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
 };
 
-function Clock({ lastUpdate, light }) {
+function Clock({ lastUpdate, light }: IClockProps) {
   return (
     <div className={light ? "light" : ""}>
       {format(new Date(lastUpdate))}
-      <style jsx>{`
+      <style>{`
         div {
           padding: 15px;
           display: inline-block;

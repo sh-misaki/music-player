@@ -8,7 +8,7 @@ export const exampleInitialState = {
   placeholderData: null
 };
 
-function reducer(state = exampleInitialState, action) {
+function reducer(state = exampleInitialState, action: any) {
   switch (action.type) {
     case actionTypes.FAILURE:
       return {

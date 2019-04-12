@@ -3,7 +3,12 @@ import { connect } from "react-redux";
 
 import { increment, decrement, reset } from "../../../stores/actions";
 
-class Counter extends Component {
+export interface ICounterInterface {
+  dispatch: any;
+  count: number;
+}
+
+class Counter extends Component<ICounterInterface> {
   public increment = () => {
     this.props.dispatch(increment());
   }
@@ -20,7 +25,7 @@ class Counter extends Component {
     const { count } = this.props;
     return (
       <div>
-        <style jsx>{`
+        <style>{`
           div {
             padding: 0 0 20px 0;
           }
@@ -36,5 +41,5 @@ class Counter extends Component {
   }
 }
 
-const mapStateToProps = ({ count }) => ({ count });
+const mapStateToProps = ({ count }: ICounterInterface) => ({ count });
 export default connect(mapStateToProps)(Counter);
