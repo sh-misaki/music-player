@@ -5,7 +5,7 @@ import Document, {
   NextDocumentContext
 } from "next/document";
 import { ServerStyleSheet } from "styled-components";
-import normalize from 'normalize.css/normalize.css';
+import ress from 'ress/ress.css';
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -29,7 +29,7 @@ export default class MyDocument extends Document {
       <html lang="ja">
         <Head>
           {this.props.styleTags}
-          <style global>{normalize}</style>
+          <style global>{ress}</style>
         </Head>
         <body>
           <Main/>
