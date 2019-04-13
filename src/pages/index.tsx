@@ -12,6 +12,8 @@ interface ITopPage {
 
 interface ITopState {
   artist: {};
+  albums: {};
+  topTracks: {};
 }
 
 export default class TopPage extends React.Component<ITopPage, ITopState> {
@@ -21,7 +23,9 @@ export default class TopPage extends React.Component<ITopPage, ITopState> {
   }
 
   public state: ITopState = {
-    artist: {}
+    artist: {},
+    albums: {},
+    topTracks: {}
   };
 
   public async componentDidMount() {
@@ -32,14 +36,28 @@ export default class TopPage extends React.Component<ITopPage, ITopState> {
     // cookieにtokenが存在しない場合、設定
     if (!this.props.token) {document.cookie = `token=${token}`; }
 
-    const res = await axios({
+    const resArtist = await axios({
       headers: { Authorization: `Bearer ${token}`, },
       method: "get",
       url: "https://api.spotify.com/v1/artists/7n2Ycct7Beij7Dj7meI4X0",
     });
 
+    const resAlbum = await axios({
+      headers: { Authorization: `Bearer ${token}`, },
+      method: "get",
+      url: `https://api.spotify.com/v1/artists/${resArtist.data.id}/albums`,
+    });
+
+    const resTopTracks = await axios({
+      headers: { Authorization: `Bearer ${token}`, },
+      method: "get",
+      url: `https://api.spotify.com/v1/artists/${resArtist.data.id}/top-tracks?country=jp`,
+    });
+
     this.setState({
-      artist: res.data,
+      artist: resArtist.data,
+      albums: resAlbum.data,
+      topTracks: resTopTracks.data.tracks,
     });
   }
 
@@ -49,6 +67,8 @@ export default class TopPage extends React.Component<ITopPage, ITopState> {
       <Main>
         <Top
           artist={this.state.artist}
+          albums={this.state.albums}
+          topTracks={this.state.topTracks}
         />
       </Main>
     );
