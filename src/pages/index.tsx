@@ -2,18 +2,15 @@ import * as React from "react";
 import axios from "axios";
 import cookies from "next-cookies";
 
-import Top from "~/components/containers";
+import Home from "~/components/containers/Home";
 import Main from "~/components/templates/Main";
 
 interface ITopPage {
   token: string;
-  artist: object;
 }
 
 interface ITopState {
-  artist: {};
-  albums: {};
-  topTracks: {};
+  artists: object[];
 }
 
 export default class TopPage extends React.Component<ITopPage, ITopState> {
@@ -23,9 +20,7 @@ export default class TopPage extends React.Component<ITopPage, ITopState> {
   }
 
   public state: ITopState = {
-    artist: {},
-    albums: {},
-    topTracks: {}
+    artists: [],
   };
 
   public async componentDidMount() {
@@ -36,28 +31,29 @@ export default class TopPage extends React.Component<ITopPage, ITopState> {
     // cookieにtokenが存在しない場合、設定
     if (!this.props.token) {document.cookie = `token=${token}`; }
 
-    const resArtist = await axios({
+    const resMyArtists = await axios({
       headers: { Authorization: `Bearer ${token}`, },
       method: "get",
-      url: "https://api.spotify.com/v1/artists/7n2Ycct7Beij7Dj7meI4X0",
+      url: `https://api.spotify.com/v1/me/top/artists`,
     });
 
-    const resAlbum = await axios({
-      headers: { Authorization: `Bearer ${token}`, },
-      method: "get",
-      url: `https://api.spotify.com/v1/artists/${resArtist.data.id}/albums`,
-    });
+    console.log(resMyArtists.data)
 
-    const resTopTracks = await axios({
+    const requestArtists = [
+      "0bAsR2unSRpn6BQPEnNlZm",
+      "7n2Ycct7Beij7Dj7meI4X0",
+    ].concat(resMyArtists.data.items.map((item) => {
+      return item.id;
+    }));
+
+    const resArtists = await axios({
       headers: { Authorization: `Bearer ${token}`, },
       method: "get",
-      url: `https://api.spotify.com/v1/artists/${resArtist.data.id}/top-tracks?country=jp`,
+      url: `https://api.spotify.com/v1/artists?ids=${requestArtists.join(",")}`,
     });
 
     this.setState({
-      artist: resArtist.data,
-      albums: resAlbum.data,
-      topTracks: resTopTracks.data.tracks,
+      artists: resArtists.data.artists,
     });
   }
 
@@ -65,10 +61,8 @@ export default class TopPage extends React.Component<ITopPage, ITopState> {
 
     return (
       <Main>
-        <Top
-          artist={this.state.artist}
-          albums={this.state.albums}
-          topTracks={this.state.topTracks}
+        <Home
+          artists={this.state.artists}
         />
       </Main>
     );

@@ -2,7 +2,7 @@ import * as React from "react";
 import axios from "axios";
 import cookies from "next-cookies";
 
-import Top from "~/components/containers";
+import List from "~/components/containers";
 import Main from "~/components/templates/Main";
 
 interface ITopPage {
@@ -39,7 +39,7 @@ export default class TopPage extends React.Component<ITopPage> {
 
     return (
       <Main>
-        <Top
+        <List
           artist={this.props.artist}
           albums={this.props.albums}
           topTracks={this.props.topTracks}

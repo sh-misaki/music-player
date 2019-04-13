@@ -4,7 +4,7 @@ import { Wrapper } from "./style";
 
 import Button from "~/components/atoms/Button";
 
-const SCOPE = "user-read-private%20user-read-email";
+const SCOPE = "user-read-private%20user-read-email%20user-top-read";
 const RESPONSE_TYPE = "token";
 const STATE = "123";
 
