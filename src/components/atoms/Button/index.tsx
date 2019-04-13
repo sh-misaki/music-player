@@ -1,4 +1,4 @@
-import React, { Component, Children } from "react";
+import React, { Component, } from "react";
 import { ButtonWrapper } from "./style";
 
 class Button extends Component {
