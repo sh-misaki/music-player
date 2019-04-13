@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Link from "next/link";
 import { connect } from "react-redux";
 
@@ -12,9 +12,10 @@ export interface IPageProps {
   lastUpdate: string | number;
   error?: Error;
   light?: boolean;
+  token: string;
 }
 
-class Top extends Component<IPageProps> {
+class Top extends React.Component<IPageProps> {
   public render() {
     const {
       error,

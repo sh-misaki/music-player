@@ -19,7 +19,7 @@ export default class MyDocument extends Document {
     const initialProps = await Document.getInitialProps(ctx);
     return {
       ...initialProps,
-      styles: [...(initialProps.styles), ...sheet.getStyleElement()]
+      styles: [...(initialProps.styles), ...sheet.getStyleElement()],
     };
   }
 
@@ -30,7 +30,7 @@ export default class MyDocument extends Document {
           {this.props.styleTags}
         </Head>
         <body>
-          <Main />
+          <Main/>
           <NextScript />
         </body>
       </html>
