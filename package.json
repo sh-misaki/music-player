@@ -40,6 +40,7 @@
     "@types/react-redux": "^7.0.6",
     "@types/styled-components": "^4.1.13",
     "@zeit/next-typescript": "^1.1.1",
+    "babel-root-import": "^4.1.8",
     "pre-commit": "^1.2.2",
     "ts-loader": "^5.3.3",
     "tslint": "^5.15.0",

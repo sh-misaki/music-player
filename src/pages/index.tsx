@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import { loadData, tickClock } from "../stores/actions";
-import Page from "../components/containers";
+import { loadData, tickClock } from "~/stores/actions";
+import Page from "~/components/containers";
 
 export default class BlogsPage extends React.Component {
   protected static async getInitialProps(props: any) {
