@@ -17,41 +17,27 @@ import {
 } from "./style";
 
 export interface IPageProps {
-  artist: object;
-  albums: object;
-  topTracks: object;
+  title: string;
+  coverImg: string;
+  tracks: object[];
+  recommendations: object[];
 }
 
-class Top extends React.Component<IPageProps> {
+class List extends React.Component<IPageProps> {
   public render() {
-    const { artist, albums, topTracks } = this.props;
-    const {
-      images,
-      name,
-    } = artist;
-
-    console.log(artist)
-    console.log(albums)
-    console.log(topTracks)
-
-    if (
-      !Object.keys(artist).length ||
-      !Object.keys(albums).length ||
-      !Object.keys(topTracks).length
-    ) { return (<div/>); }
-    const imageSrc = images[0].url;
+    const { title, coverImg, tracks, recommendations } = this.props;
 
     return (
-      <Wrapper backgroundImage={imageSrc}>
+      <Wrapper backgroundImage={coverImg}>
         <Image>
           <Name>
-            { name }
+            { title }
           </Name>
         </Image>
         <Detail>
           <PopularityListWrapper>
             {
-              topTracks.map((track, index) => {
+              tracks.map((track, index) => {
                 const minute = Math.floor(track.duration_ms / 1000 / 60);
                 return (
                   <PopularityList>
@@ -61,17 +47,17 @@ class Top extends React.Component<IPageProps> {
                         { track.name }
                       </PopularityListDescriptionName>
                       <PopularityListDescriptionArtist>
-                        { name }
+                        { track.artists[0].name }
                       </PopularityListDescriptionArtist>
                     </PopularityListDescription>
                     { minute }:{ Math.floor(track.duration_ms / 1000 - minute * 60) }
                   </PopularityList>
-                )
+                );
               })
             }
           </PopularityListWrapper>
           <TrackListWrapper>
-            { albums.items.map((album) => {
+            { recommendations.map((album) => {
               return (
                 <TrackList>
                   <TrackImage src={album.images[1].url}/>
@@ -87,4 +73,4 @@ class Top extends React.Component<IPageProps> {
   }
 }
 
-export default connect((state) => state)(Top);
+export default connect((state) => state)(List);
