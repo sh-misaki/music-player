@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next ./src",
+    "dev": "node server.ts",
     "build": "next build ./src",
-    "start": "next start ./src",
+    "start": "NODE_ENV=production node server.ts",
     "lint": "tslint -c tslint.json 'components/**/*.ts{,x}'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -29,6 +29,7 @@
     "next-cookies": "^1.1.2",
     "next-redux-saga": "^4.0.1",
     "next-redux-wrapper": "^3.0.0-alpha.2",
+    "next-routes": "^1.4.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.1",
