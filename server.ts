@@ -7,8 +7,6 @@ const app = next({
 });
 const handler = routes.getRequestHandler(app);
 
-console.log(routes)
-
 // Without express
 const { createServer } = require("http");
 app.prepare().then(() => {
