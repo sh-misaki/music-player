@@ -12,5 +12,8 @@
         "preprocess": false
       },
     ],
+    ["module:babel-root-import", {
+      "rootPathSuffix": "src"
+    }],
   ]
 }
