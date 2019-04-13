@@ -15,5 +15,6 @@
     ["module:babel-root-import", {
       "rootPathSuffix": "src"
     }],
+    ["inline-import", { "extensions": [".css"] } ],
   ]
 }
