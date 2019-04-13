@@ -2,29 +2,26 @@ import * as React from "react";
 import axios from "axios";
 import cookies from "next-cookies";
 
-import { loadData, tickClock } from "~/stores/actions";
 import Top from "~/components/containers";
 
 interface ITopPage {
   token: string;
+  recentlyPlayed: object[];
 }
 
-export default class TopPage extends React.Component<ITopPage> {
+interface ITopState {
+  recentlyPlayed: any;
+}
+
+export default class TopPage extends React.Component<ITopPage, ITopState> {
   protected static async getInitialProps({ctx}: any) {
-    const { store, isServer } = ctx;
-    store.dispatch(tickClock(isServer));
-
-    if (!store.getState().placeholderData) {
-      store.dispatch(loadData());
-    }
-
     const { token } = cookies(ctx);
-
-    return {
-      isServer,
-      token,
-    };
+    return { token, };
   }
+
+  public state: ITopState = {
+    recentlyPlayed: []
+  };
 
   public async componentDidMount() {
     const token = this.props.token || window.location.hash.split("&")[0].split("=")[1];
@@ -35,22 +32,21 @@ export default class TopPage extends React.Component<ITopPage> {
     if (!this.props.token) {document.cookie = `token=${token}`; }
 
     const res = await axios({
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { Authorization: `Bearer ${token}`, },
       method: "get",
-      url: "https://api.spotify.com/v1/me",
+      url: "https://api.spotify.com/v1/me/player/recently-played",
+    });
+
+    this.setState({
+      recentlyPlayed: res.data,
     });
   }
 
   public render() {
+
     return (
       <Top
-        title="Index Page"
-        linkTo="/other"
-        NavigateTo="Other Page"
-        lastUpdate={0}
-        token={this.props.token}
+        recentlyPlayed={this.state.recentlyPlayed}
       />
     );
   }
