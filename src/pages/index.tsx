@@ -3,14 +3,15 @@ import axios from "axios";
 import cookies from "next-cookies";
 
 import Top from "~/components/containers";
+import Main from "~/components/templates/Main";
 
 interface ITopPage {
   token: string;
-  recentlyPlayed: object[];
+  artist: object;
 }
 
 interface ITopState {
-  recentlyPlayed: any;
+  artist: {};
 }
 
 export default class TopPage extends React.Component<ITopPage, ITopState> {
@@ -20,7 +21,7 @@ export default class TopPage extends React.Component<ITopPage, ITopState> {
   }
 
   public state: ITopState = {
-    recentlyPlayed: []
+    artist: {}
   };
 
   public async componentDidMount() {
@@ -34,20 +35,22 @@ export default class TopPage extends React.Component<ITopPage, ITopState> {
     const res = await axios({
       headers: { Authorization: `Bearer ${token}`, },
       method: "get",
-      url: "https://api.spotify.com/v1/me/player/recently-played",
+      url: "https://api.spotify.com/v1/artists/7n2Ycct7Beij7Dj7meI4X0",
     });
 
     this.setState({
-      recentlyPlayed: res.data,
+      artist: res.data,
     });
   }
 
   public render() {
 
     return (
-      <Top
-        recentlyPlayed={this.state.recentlyPlayed}
-      />
+      <Main>
+        <Top
+          artist={this.state.artist}
+        />
+      </Main>
     );
   }
 }

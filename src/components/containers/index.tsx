@@ -2,25 +2,22 @@ import React from "react";
 import { connect } from "react-redux";
 
 export interface IPageProps {
-  recentlyPlayed: object[];
+  artist: object;
 }
 
 class Top extends React.Component<IPageProps> {
   public render() {
-    const { recentlyPlayed, } = this.props;
+    const { artist, } = this.props;
     const {
-      items,
-    } = recentlyPlayed;
-    console.log(items)
+      images,
+    } = artist;
+
+    if ( !Object.keys(artist).length ) { return (<div/>); }
+    const imageSrc = images[0].url;
+
     return (
       <div>
-        { items && items.map((item => {
-          return (
-            <div>
-              { item.track.type }
-            </div>
-          );
-        })) }
+        <img src={imageSrc}/>
       </div>
     );
   }
