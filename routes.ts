@@ -1,6 +1,6 @@
-const routes = require("next-routes");
+const routesFunc = require("next-routes");
 
-module.exports = routes()
+module.exports = routesFunc()
   .add("index")
   .add("login")
   .add("artistsShow", "/artists/:id")

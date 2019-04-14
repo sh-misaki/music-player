@@ -1,5 +1,4 @@
 import React from "react";
-import {Link} from "../../../../routes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 
@@ -23,9 +22,11 @@ import {
 export interface IPageProps {
   title: string;
   coverImg: string;
-  tracks: object[];
-  recommendations: object[];
+  tracks: SpotifyApi.TrackObjectSimplified[];
+  recommendations: SpotifyApi.AlbumObjectFull[];
 }
+
+const { Link } = require("../../../../routes");
 
 class List extends React.Component<IPageProps> {
   public async playMusic(id: string): Promise<void> {

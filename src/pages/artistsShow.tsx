@@ -6,9 +6,9 @@ import List from "~/components/containers/List";
 import Main from "~/components/templates/Main";
 
 interface ITopPage {
-  artist: object;
-  albums: object[];
-  topTracks: object[];
+  artist: SpotifyApi.ArtistObjectFull;
+  albums: SpotifyApi.AlbumObjectFull[];
+  topTracks: SpotifyApi.TrackObjectFull[];
 }
 
 export default class TopPage extends React.Component<ITopPage> {
