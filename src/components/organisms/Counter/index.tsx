@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { increment, decrement, reset } from "../../../stores/actions";
+import { increment, decrement, reset } from "~/stores/actions";
 
 export interface ICounterInterface {
   dispatch: any;
