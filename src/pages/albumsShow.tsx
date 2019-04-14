@@ -6,7 +6,7 @@ import List from "~/components/containers/List";
 import Main from "~/components/templates/Main";
 
 interface ITopPage {
-  album: object;
+  album: SpotifyApi.AlbumObjectFull;
 }
 
 export default class TopPage extends React.Component<ITopPage> {
@@ -29,7 +29,6 @@ export default class TopPage extends React.Component<ITopPage> {
 
   public render() {
     const { album } = this.props;
-    console.log(album)
     return (
       <Main>
         <List

@@ -3,6 +3,7 @@ import {
   SideMenu,
   SideMenuLink,
 } from "./style";
+import { PropsWithChildren } from "react";
 
 const sideMenuLinks = [
   {
@@ -16,7 +17,11 @@ const sideMenuLinks = [
   },
 ];
 
-export default ({ children }) => (
+interface IProps {
+  sample?: string;
+}
+
+export default ({ children }: PropsWithChildren<IProps>) => (
   <Wrapper>
     <SideMenu>
       {

@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
+interface IWrapperProps {
+  backgroundImage: string;
+}
+
 export const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   flex-grow: 1;
-  background-image: url(${props => props.backgroundImage});
+  background-image: url(${(props: IWrapperProps) => props.backgroundImage});
   background-size: cover;
   padding: 32px 48px;
 `;

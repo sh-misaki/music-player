@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import {Link} from "../../../../routes";
+const { Link } = require("../../../../routes");
 
 export interface IPageProps {
-  artists: object;
+  artists: SpotifyApi.ArtistObjectFull[];
 }
 
 class Top extends React.Component<IPageProps> {

@@ -10,7 +10,7 @@ interface ITopPage {
 }
 
 interface ITopState {
-  artists: object[];
+  artists: SpotifyApi.ArtistObjectFull[];
 }
 
 export default class TopPage extends React.Component<ITopPage, ITopState> {
@@ -37,8 +37,6 @@ export default class TopPage extends React.Component<ITopPage, ITopState> {
       url: `https://api.spotify.com/v1/me/top/artists`,
     });
 
-    console.log(resMyArtists.data)
-
     const requestArtists = [
       "0bAsR2unSRpn6BQPEnNlZm",
       "7n2Ycct7Beij7Dj7meI4X0",
@@ -46,7 +44,7 @@ export default class TopPage extends React.Component<ITopPage, ITopState> {
       "08lN7bm4Etec8ETFxaTUmq",
       "0eQSoTI7sQENREQM8Klp2j",
       "6O9ZTocnZDT41j4YrOalhz",
-    ].concat(resMyArtists.data.items.map((item) => {
+    ].concat(resMyArtists.data.items.map((item: SpotifyApi.ArtistObjectFull): string => {
       return item.id;
     }));
 
