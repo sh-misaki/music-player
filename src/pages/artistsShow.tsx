@@ -2,13 +2,13 @@ import * as React from "react";
 import axios from "axios";
 import cookies from "next-cookies";
 
-import List from "~/components/containers";
+import List from "~/components/containers/List";
 import Main from "~/components/templates/Main";
 
 interface ITopPage {
   artist: object;
-  albums: object;
-  topTracks: object;
+  albums: object[];
+  topTracks: object[];
 }
 
 export default class TopPage extends React.Component<ITopPage> {
@@ -30,19 +30,19 @@ export default class TopPage extends React.Component<ITopPage> {
 
     return {
       artist: res[0].data,
-      albums: res[1].data,
+      albums: res[1].data.items,
       topTracks: res[2].data.tracks,
     };
   }
 
   public render() {
-
     return (
       <Main>
         <List
-          artist={this.props.artist}
-          albums={this.props.albums}
-          topTracks={this.props.topTracks}
+          title={this.props.artist.name}
+          coverImg={this.props.artist.images[0].url}
+          tracks={this.props.topTracks}
+          recommendations={this.props.albums}
         />
       </Main>
     );

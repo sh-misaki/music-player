@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   flex-grow: 1;
   background-image: url(${props => props.backgroundImage});
   background-size: cover;
-  padding: 16px;
+  padding: 32px 48px;
 `;
 
 export const Image = styled.div`
@@ -15,13 +15,14 @@ export const Image = styled.div`
 
 export const Name = styled.span`
   color: white;
-  font-size: 12vw;
+  font-size: 80px;
   font-family: monospace;
   font-weight: bold;
   letter-spacing: 0.1em;
   position: absolute;
   bottom: 30%;
   left: 5%;
+  text-shadow: 2px 2px 10px #bebebe;
 `;
 
 export const Detail = styled.div`
@@ -83,4 +84,9 @@ export const TrackList = styled.div`
 
 export const TrackImage = styled.img`
   width: 100%;
+`;
+
+export const Player = styled.div`
+  display: flex;
+  justify-content: space-around;
 `;
