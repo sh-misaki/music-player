@@ -6,6 +6,14 @@ import withReduxSaga from "next-redux-saga";
 
 import createStore from "~/stores";
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faPlay,
+  faStepForward,
+  faStepBackward,
+} from '@fortawesome/free-solid-svg-icons'
+library.add(faPlay, faStepForward,faStepBackward,);
+
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};

@@ -42,6 +42,10 @@ export default class TopPage extends React.Component<ITopPage, ITopState> {
     const requestArtists = [
       "0bAsR2unSRpn6BQPEnNlZm",
       "7n2Ycct7Beij7Dj7meI4X0",
+      "03E7w8NrBr4lNCK33TQyil",
+      "08lN7bm4Etec8ETFxaTUmq",
+      "0eQSoTI7sQENREQM8Klp2j",
+      "6O9ZTocnZDT41j4YrOalhz",
     ].concat(resMyArtists.data.items.map((item) => {
       return item.id;
     }));
