@@ -1,4 +1,3 @@
-import { reducerWithInitialState } from "typescript-fsa-reducers";
 import { actionTypes } from "./types";
 
 /* Storeの型を定義する。 */
