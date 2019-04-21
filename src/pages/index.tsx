@@ -7,7 +7,7 @@ import Main from "~/components/templates/Main";
 
 import { connect } from "react-redux";
 
-import { ITodoState } from "~/stores/modules/authorizations/reducer";
+import { ITodoState } from "~/stores/modules/artists/reducers";
 
 interface ITopPage {
   token: string;
@@ -79,7 +79,7 @@ class TopPage extends React.Component<ITopPage, ITopState> {
   }
 }
 
-function mapStateToProps(store) {
+function mapStateToProps(store: ITodoState) {
   return {store};
 }
 
