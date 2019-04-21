@@ -6,9 +6,18 @@ import Document, {
 } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 import ress from 'ress/ress.css';
+import cookies from "next-cookies";
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
+    const { token } = cookies(ctx);
+
+    if (!token && ctx.asPath !== "/login") {
+      ctx.res.writeHead(302, { Location: '/login' })
+      ctx.res.end();
+      return
+    }
+
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
     ctx.renderPage = () =>
