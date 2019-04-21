@@ -11,7 +11,7 @@ import {
   faPlay,
   faStepForward,
   faStepBackward,
-} from '@fortawesome/free-solid-svg-icons'
+} from '@fortawesome/free-solid-svg-icons';
 library.add(faPlay, faStepForward,faStepBackward,);
 
 class MyApp extends App {
@@ -27,6 +27,7 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps, store } = this.props;
+
     return (
       <Container>
         <Provider store={store}>
