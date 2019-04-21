@@ -5,15 +5,20 @@ import cookies from "next-cookies";
 import Home from "~/components/containers/Home";
 import Main from "~/components/templates/Main";
 
+import { connect } from "react-redux";
+
+import { ITodoState } from "~/stores/modules/authorizations/reducer";
+
 interface ITopPage {
   token: string;
+  store: ITodoState;
 }
 
 interface ITopState {
   artists: SpotifyApi.ArtistObjectFull[];
 }
 
-export default class TopPage extends React.Component<ITopPage, ITopState> {
+class TopPage extends React.Component<ITopPage, ITopState> {
   protected static async getInitialProps({ctx}: any) {
     const { token } = cookies(ctx);
     return { token, };
@@ -43,7 +48,11 @@ export default class TopPage extends React.Component<ITopPage, ITopState> {
       "03E7w8NrBr4lNCK33TQyil",
       "08lN7bm4Etec8ETFxaTUmq",
       "0eQSoTI7sQENREQM8Klp2j",
+      "5kVZa4lFUmAQlBogl1fkd6",
+      "66CXWjxzNUsdJxJ2JdwvnR",
       "6O9ZTocnZDT41j4YrOalhz",
+      "1qma7XhwZotCAucL7NHVLY",
+      "1dfeR4HaWDbWqFHLkxsg1d",
     ].concat(resMyArtists.data.items.map((item: SpotifyApi.ArtistObjectFull): string => {
       return item.id;
     }));
@@ -60,7 +69,6 @@ export default class TopPage extends React.Component<ITopPage, ITopState> {
   }
 
   public render() {
-
     return (
       <Main>
         <Home
@@ -70,3 +78,9 @@ export default class TopPage extends React.Component<ITopPage, ITopState> {
     );
   }
 }
+
+function mapStateToProps(store) {
+  return {store};
+}
+
+export default connect(mapStateToProps)(TopPage);
