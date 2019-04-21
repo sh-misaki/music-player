@@ -79,7 +79,7 @@ class TopPage extends React.Component<ITopPage, ITopState> {
   }
 }
 
-function mapStateToProps(store) {
+function mapStateToProps(store: ITodoState) {
   return {store};
 }
 

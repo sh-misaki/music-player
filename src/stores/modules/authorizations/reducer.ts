@@ -1,33 +1,3 @@
-// /* すべてのActionをインポート */
-// import * as actions from "./action";
-
-// /* tasks[] 配列に格納するオブジェクトの型を定義する */
-// interface ITask {
-//   id: number;
-//   text: string;
-//   done: boolean;
-// }
-
-// let idCounter: number = 1;
-
-// /* Taskを作成する。ITaskという指定された型を返す。 */
-// const buildTask = (text: string): ITask => ({
-//   done: false,
-//   id: ++idCounter,
-//   text
-// });
-
-// /*
-//     addTodoというActionを待ち受けるとともに初期状態のStoreをセットする。
-//     addTodoが飛んできた場合には、新しいTaskをStoreに格納して、Storeを更新する。
-//  */
-// export default reducerWithInitialState(initialReduceTodoState)
-//   .case(actions.addTodo, (state: ITodoState, payload) => ({
-//     ...state,
-//     tasks: state.tasks.concat(buildTask(payload))
-//   }))
-//   .build();
-
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 import { actionTypes } from "./action";
 
@@ -37,7 +7,7 @@ export interface ITodoState {
   error: boolean;
   lastUpdate: number;
   light: boolean;
-  placeholderData: object | null;
+  placeholderData: object;
 }
 
 export const exampleInitialState: ITodoState = {
@@ -45,11 +15,11 @@ export const exampleInitialState: ITodoState = {
   error: false,
   lastUpdate: 0,
   light: false,
-  placeholderData: null
+  placeholderData: {}
 };
 
 export default reducerWithInitialState(exampleInitialState)
-  .case(actionTypes.FAILURE, (state: ITodoState, payload) => {
+  .case(actionTypes.FAILURE, (state: ITodoState, payload: number) => {
     return {
       ...state,
       tasks: state.count += payload,
