@@ -7,7 +7,7 @@ import Main from "~/components/templates/Main";
 
 import { connect } from "react-redux";
 
-import { ITodoState } from "~/stores/modules/authorizations/reducer";
+import { ITodoState } from "~/stores/modules/todos/reducers";
 
 interface ITopPage {
   token: string;
@@ -69,6 +69,9 @@ class TopPage extends React.Component<ITopPage, ITopState> {
   }
 
   public render() {
+
+    console.log(this)
+
     return (
       <Main>
         <Home
