@@ -31,7 +31,10 @@ class TopPage extends React.Component<ITopPage, ITopState> {
   public async componentDidMount() {
     const token = this.props.token || window.location.hash.split("&")[0].split("=")[1];
 
-    if (!token) {return; }
+    if (!token) {
+      window.location.href = "/login";
+      return;
+    }
 
     // cookieにtokenが存在しない場合、設定
     if (!this.props.token) {document.cookie = `token=${token}`; }
