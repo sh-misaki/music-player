@@ -36,35 +36,14 @@ class TopPage extends React.Component<ITopPage, ITopState> {
     // cookieにtokenが存在しない場合、設定
     if (!this.props.token) {document.cookie = `token=${token}`; }
 
-    const resMyArtists = await axios({
+    const resArtists = await axios({
       headers: { Authorization: `Bearer ${token}`, },
       method: "get",
       url: `https://api.spotify.com/v1/me/top/artists`,
     });
 
-    const requestArtists = [
-      "0bAsR2unSRpn6BQPEnNlZm",
-      "7n2Ycct7Beij7Dj7meI4X0",
-      "03E7w8NrBr4lNCK33TQyil",
-      "08lN7bm4Etec8ETFxaTUmq",
-      "0eQSoTI7sQENREQM8Klp2j",
-      "5kVZa4lFUmAQlBogl1fkd6",
-      "66CXWjxzNUsdJxJ2JdwvnR",
-      "6O9ZTocnZDT41j4YrOalhz",
-      "1qma7XhwZotCAucL7NHVLY",
-      "1dfeR4HaWDbWqFHLkxsg1d",
-    ].concat(resMyArtists.data.items.map((item: SpotifyApi.ArtistObjectFull): string => {
-      return item.id;
-    }));
-
-    const resArtists = await axios({
-      headers: { Authorization: `Bearer ${token}`, },
-      method: "get",
-      url: `https://api.spotify.com/v1/artists?ids=${requestArtists.join(",")}`,
-    });
-
     this.setState({
-      artists: resArtists.data.artists,
+      artists: resArtists.data.items,
     });
   }
 
