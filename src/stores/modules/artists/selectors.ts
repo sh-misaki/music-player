@@ -1,9 +1,9 @@
-import { ITodoState } from "./reducers";
+import { ITodoState } from "./types";
 
-function checkIfCountStarted( duck: ITodoState ) {
-  return duck.count > 0;
+function checkIfArtistsExist( duck: ITodoState ) {
+  return duck.artists.length > 0;
 }
 
 export default {
-  checkIfCountStarted
+  checkIfArtistsExist
 };

@@ -1,5 +1,6 @@
 import * as React from "react";
 import axios from "axios";
+import { bindActionCreators } from "redux";
 import cookies from "next-cookies";
 
 import Home from "~/components/containers/Home";
@@ -7,7 +8,8 @@ import Main from "~/components/templates/Main";
 
 import { connect } from "react-redux";
 
-import { ITodoState } from "~/stores/modules/artists/reducers";
+import { artistsOperations } from "~/stores/modules/artists";
+import { ITodoState } from "~/stores/modules/artists/types";
 
 interface ITopPage {
   token: string;
@@ -20,6 +22,7 @@ interface ITopState {
 
 class TopPage extends React.Component<ITopPage, ITopState> {
   protected static async getInitialProps({ctx}: any) {
+    console.log(ctx);
     const { token } = cookies(ctx);
     return { token, };
   }
@@ -30,6 +33,7 @@ class TopPage extends React.Component<ITopPage, ITopState> {
 
   public async componentDidMount() {
     const token = this.props.token || window.location.hash.split("&")[0].split("=")[1];
+    this.props.increment();
 
     if (!token) {
       window.location.href = "/login";
@@ -61,8 +65,11 @@ class TopPage extends React.Component<ITopPage, ITopState> {
   }
 }
 
-function mapStateToProps(store: ITodoState) {
+const mapStateToProps = (store: ITodoState) => {
   return {store};
-}
+};
+const mapDispatchToProps = dispatch => ({
+  increment: () => dispatch({ type: "INCREMENT" })
+});
 
-export default connect(mapStateToProps)(TopPage);
+export default connect(mapStateToProps, mapDispatchToProps)(TopPage);
