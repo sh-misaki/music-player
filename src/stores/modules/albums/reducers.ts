@@ -1,7 +1,7 @@
 import IAlbumsState, { actionTypes } from "./types";
 
-export const exampleInitialState: IAlbumsState = {
-  albums: [],
+export const exampleInitialState: IAlbumsState | {} = {
+  album: {},
 };
 
 export default function reducer(state = exampleInitialState, action: any) {
@@ -9,7 +9,7 @@ export default function reducer(state = exampleInitialState, action: any) {
     case actionTypes.FETCH_LIST:
       return {
         ...state,
-        albums: action.albums,
+        album: action.album,
       };
     default:
       return state;

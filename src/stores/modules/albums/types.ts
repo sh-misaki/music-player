@@ -7,5 +7,5 @@ export const actionTypes = {
 };
 
 export default interface IAlbumsState {
-  albums: SpotifyApi.AlbumObjectFull[];
+  album: SpotifyApi.AlbumObjectFull;
 }
