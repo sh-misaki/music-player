@@ -25,9 +25,9 @@ export default ({ children }: PropsWithChildren<IProps>) => (
   <Wrapper>
     <SideMenu>
       {
-        sideMenuLinks.map((link) => {
+        sideMenuLinks.map((link, i) => {
           return (
-            <SideMenuLink>
+            <SideMenuLink key={i}>
               { link.text }
             </SideMenuLink>
           );

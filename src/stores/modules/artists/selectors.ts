@@ -1,6 +1,6 @@
-import { ITodoState } from "./types";
+import IArtistsState from "./types";
 
-function checkIfArtistsExist( duck: ITodoState ) {
+function checkIfArtistsExist( duck: IArtistsState ) {
   return duck.artists.length > 0;
 }
 
