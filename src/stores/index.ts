@@ -4,6 +4,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunkMiddleware from "redux-thunk";
 
 import * as artistsReducers from "./modules/artists";
+import * as artistShowReducers from "./modules/artistsShow";
 import * as albumReducers from "./modules/albums";
 
 let middleware: any;
@@ -17,11 +18,13 @@ if (process.env.NODE_ENV !== "production") {
 export default function configureStore() {
   return createStore(combineReducers({
     artistsReducers: artistsReducers.default,
+    artistShowReducers: artistShowReducers.default,
     albumReducers: albumReducers.default,
   }), middleware);
 }
 
 export interface IStore {
   artistsReducers: artistsReducers.artistsTypes;
+  artistShowReducers: artistShowReducers.artistShowTypes;
   albumReducers: albumReducers.albumsTypes;
 }

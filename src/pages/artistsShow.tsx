@@ -1,38 +1,40 @@
 import * as React from "react";
-import axios from "axios";
 import cookies from "next-cookies";
+import { connect } from "react-redux";
 
 import List from "~/components/containers/List";
 import Main from "~/components/templates/Main";
 
+import { artistShowOperations } from "~/stores/modules/artistsShow";
+import { IStore } from "~/stores/";
+
 interface ITopPage {
-  artist: SpotifyApi.ArtistObjectFull;
+  token: string;
+  id: string;
+  artist: SpotifyApi.ArtistObjectFull | any;
   albums: SpotifyApi.AlbumObjectFull[];
   topTracks: SpotifyApi.TrackObjectFull[];
+  fetchListAsync: (
+    token: string,
+    id: string,
+  ) => {};
 }
 
-export default class TopPage extends React.Component<ITopPage> {
+class ArtistsShow extends React.Component<ITopPage> {
   protected static async getInitialProps({ ctx }: any) {
     const { token } = cookies(ctx);
     const { id } = ctx.query;
 
     if (!token) {return {}; }
 
-    const res = await axios.all([
-      `${id}`,
-      `${id}/albums`,
-      `${id}/top-tracks?country=jp`,
-    ].map((path: string) => {
-      return axios.create({
-        headers: { Authorization: `Bearer ${token}`, },
-      }).get(`https://api.spotify.com/v1/artists/${path}`);
-    }));
-
     return {
-      artist: res[0].data,
-      albums: res[1].data.items,
-      topTracks: res[2].data.tracks,
+      token,
+      id,
     };
+  }
+
+  public async componentDidMount() {
+    this.props.fetchListAsync(this.props.token, this.props.id);
   }
 
   public render() {
@@ -40,7 +42,7 @@ export default class TopPage extends React.Component<ITopPage> {
       <Main>
         <List
           title={this.props.artist.name}
-          coverImg={this.props.artist.images[0].url}
+          coverImg={this.props.artist.images ? this.props.artist.images[0].url : ""}
           tracks={this.props.topTracks}
           recommendations={this.props.albums}
         />
@@ -48,3 +50,16 @@ export default class TopPage extends React.Component<ITopPage> {
     );
   }
 }
+
+const mapStateToProps = (store: IStore) => {
+  return {
+    artist: store.artistShowReducers.artist,
+    albums: store.artistShowReducers.albums,
+    topTracks: store.artistShowReducers.topTracks
+  };
+};
+const mapDispatchToProps = (dispatch: any) => ({
+  fetchListAsync: (token: string, id: string) => dispatch(artistShowOperations.fetchListAsync(token, id))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ArtistsShow);
