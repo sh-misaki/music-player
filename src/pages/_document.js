@@ -10,8 +10,6 @@ import cookies from "next-cookies";
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
-    const { token } = cookies(ctx);
-
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
     ctx.renderPage = () =>
