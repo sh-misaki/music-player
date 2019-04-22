@@ -12,9 +12,9 @@ class Top extends React.Component<IPageProps> {
     return (
       <div>
         {
-           artists.map((artist) => {
+           artists.map((artist, i) => {
             return (
-              <div>
+              <div key={i}>
                 <Link route="artistsShow" params={{id: artist.id}}>
                   <div>
                     <img src={artist.images[2].url}/>
