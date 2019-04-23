@@ -1,4 +1,4 @@
-import IArtistsState from "./types";
+import { IArtistsState } from "./types";
 
 function checkIfArtistsExist( duck: IArtistsState ) {
   return duck.artists.length > 0;
