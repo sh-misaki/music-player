@@ -25,7 +25,7 @@ export interface IPageProps {
   recommendations: SpotifyApi.AlbumObjectFull[];
 }
 
-const { Link } = require("../../../../routes");
+const { Link } = require("~/../routes");
 
 class List extends React.Component<IPageProps> {
   public render() {
