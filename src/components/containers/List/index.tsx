@@ -1,4 +1,5 @@
 import React from "react";
+import analyze from "rgbaster";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { connect } from "react-redux";
@@ -24,21 +25,48 @@ export interface IPageProps {
   tracks: SpotifyApi.TrackObjectSimplified[];
   recommendations: SpotifyApi.AlbumObjectFull[];
 }
+export interface IPageState {
+  mainColor: string;
+  subColor: string;
+}
 
+const xolor = require("xolor");
 const { Link } = require("~/../routes");
 
-class List extends React.Component<IPageProps> {
+class List extends React.Component<IPageProps, IPageState> {
+  public constructor(props) {
+    super(props);
+    this.state = {
+      mainColor: "",
+      subColor: "",
+    };
+  }
+
+  public async componentWillMount() {
+    const result = await analyze(this.props.coverImg);
+    this.setState({
+      mainColor: result[0].color,
+      subColor: result[1].color,
+    });
+  }
+
   public render() {
     const { title, coverImg, tracks, recommendations } = this.props;
+    const { mainColor, subColor } = this.state;
+    const textColor = xolor(mainColor).inverse();
 
     return (
-      <Wrapper backgroundImage={coverImg}>
+      <Wrapper
+        backgroundImage={coverImg}
+        mainColor={mainColor}
+        subColor={subColor}
+      >
         <Image>
-          <Name>
+          <Name color={textColor}>
             { title }
           </Name>
         </Image>
-        <Detail>
+        <Detail color={textColor}>
           <PopularityListWrapper>
             {
               tracks.map((track, index) => {
