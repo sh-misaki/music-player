@@ -14,9 +14,9 @@ const fetchListAsync = (token: string) => {
     const resArtists = await axios({
       headers: { Authorization: `Bearer ${token}`, },
       method: "get",
-      url: `https://api.spotify.com/v1/me/top/artists`,
+      url: `https://api.spotify.com/v1/me/following?type=artist`,
     });
-    dispatch(fetchList(resArtists.data.items));
+    dispatch(fetchList(resArtists.data.artists.items));
   };
 };
 

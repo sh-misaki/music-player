@@ -2,13 +2,22 @@ import styled from "styled-components";
 
 interface IWrapperProps {
   backgroundImage: string;
+  mainColor: string;
+  subColor: string;
+}
+
+interface ITextProps {
+  color: string;
 }
 
 export const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   flex-grow: 1;
-  background-image: url(${(props: IWrapperProps) => props.backgroundImage});
+  background: linear-gradient(-45deg,
+    ${(props: IWrapperProps) => props.mainColor.replace("rgb", "rgba").replace(")", ",.7)")} 40%,
+    ${(props: IWrapperProps) => props.subColor.replace("rgb", "rgba").replace(")", ",.2)")}
+  ), url(${(props: IWrapperProps) => props.backgroundImage});
   background-size: cover;
   padding: 32px 48px;
 `;
@@ -18,19 +27,18 @@ export const Image = styled.div`
 `;
 
 export const Name = styled.span`
-  color: white;
+  color: ${(props: ITextProps) => props.color};
   font-size: 80px;
-  font-family: monospace;
   font-weight: bold;
-  letter-spacing: 0.1em;
+  letter-spacing: .01em;
   position: absolute;
   bottom: 30%;
   left: 5%;
-  text-shadow: 2px 2px 10px #bebebe;
+  line-height: 1.1;
 `;
 
 export const Detail = styled.div`
-  color: white;
+  color: ${(props: ITextProps) => props.color};
   display: flex;
   width: 35%;
   flex-direction: column;

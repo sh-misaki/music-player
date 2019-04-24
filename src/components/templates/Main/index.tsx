@@ -5,6 +5,8 @@ import {
 } from "./style";
 import { PropsWithChildren } from "react";
 
+const { Link } = require("~/../routes");
+
 const sideMenuLinks = [
   {
     text: "Home",
@@ -27,9 +29,11 @@ export default ({ children }: PropsWithChildren<IProps>) => (
       {
         sideMenuLinks.map((link, i) => {
           return (
-            <SideMenuLink key={i}>
-              { link.text }
-            </SideMenuLink>
+            <Link route="index">
+              <SideMenuLink key={i}>
+                { link.text }
+              </SideMenuLink>
+            </Link>
           );
         })
       }
