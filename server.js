@@ -30,8 +30,6 @@ app
       })[0];
       const urlObj = url.parse(req.url)
 
-      console.log(urlObj)
-
       if (!isTokenGot) {
         res.redirect("/login");
       }
