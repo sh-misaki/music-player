@@ -6,7 +6,6 @@ import Home from "~/components/containers/Home";
 import Main from "~/components/templates/Main";
 
 import { artistsOperations } from "~/stores/modules/artists";
-import { IStore } from "~/stores/";
 
 interface ITopPage {
   token: string;
@@ -17,7 +16,19 @@ interface ITopPage {
 class TopPage extends React.Component<ITopPage> {
   protected static async getInitialProps({ctx}: any) {
     const { token } = cookies(ctx);
-    return { token, };
+
+    let artistsState = { artists: null, };
+    if (token) {
+      await ctx.store.dispatch(artistsOperations.fetchListAsync(
+        token as string
+      ));
+      artistsState = ctx.store.getState().artistsReducers;
+    }
+
+    return {
+      token,
+      artists: artistsState.artists || [],
+    };
   }
 
   public async componentDidMount() {
@@ -44,10 +55,8 @@ class TopPage extends React.Component<ITopPage> {
   }
 }
 
-const mapStateToProps = (store: IStore) => {
-  return {
-    artists: store.artistsReducers.artists
-  };
+const mapStateToProps = () => {
+  return {};
 };
 const mapDispatchToProps = (dispatch: any) => ({
   fetchListAsync: (token: string) => dispatch(artistsOperations.fetchListAsync(token))
