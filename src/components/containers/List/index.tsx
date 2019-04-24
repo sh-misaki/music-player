@@ -1,6 +1,5 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "axios";
 
 import { connect } from "react-redux";
 import {
@@ -29,19 +28,6 @@ export interface IPageProps {
 const { Link } = require("../../../../routes");
 
 class List extends React.Component<IPageProps> {
-  public async playMusic(id: string): Promise<void> {
-    const token = document.cookie.split("=")[1];
-
-    await axios({
-      headers: { Authorization: `Bearer ${token}`, },
-      method: "put",
-      url: `https://api.spotify.com/v1/me/player/play`,
-      data: {
-        uris: [`spotify:track:${id}`],
-      },
-    });
-  }
-
   public render() {
     const { title, coverImg, tracks, recommendations } = this.props;
 
@@ -58,7 +44,7 @@ class List extends React.Component<IPageProps> {
               tracks.map((track, index) => {
                 const minute = Math.floor(track.duration_ms / 1000 / 60);
                 return (
-                  <PopularityList onClick={() => this.playMusic(track.id)}>
+                  <PopularityList>
                     { index }
                     <PopularityListDescription>
                       <PopularityListDescriptionName>

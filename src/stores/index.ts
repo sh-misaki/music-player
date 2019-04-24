@@ -22,9 +22,3 @@ export default function configureStore() {
     albumReducers: albumReducers.default,
   }), middleware);
 }
-
-export interface IStore {
-  artistsReducers: artistsReducers.artistsTypes;
-  artistShowReducers: artistShowReducers.artistShowTypes;
-  albumReducers: albumReducers.albumsTypes;
-}
