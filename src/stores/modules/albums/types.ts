@@ -6,6 +6,6 @@ export const actionTypes = {
   FETCH_LIST_ASYNC,
 };
 
-export default interface IAlbumsState {
+export interface IAlbumsState {
   album: SpotifyApi.AlbumObjectFull;
 }

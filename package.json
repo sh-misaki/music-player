@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node server.ts",
+    "dev": "node server.js",
     "build": "next build ./src",
-    "start": "NODE_ENV=production node server.ts",
+    "start": "NODE_ENV=production node server.js",
     "lint": "tslint -c tslint.json 'components/**/*.ts{,x}'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -27,6 +27,7 @@
     "babel-plugin-inline-import": "^3.0.0",
     "dotenv-webpack": "^1.7.0",
     "es6-promise": "^4.2.6",
+    "express": "^4.16.4",
     "fork-ts-checker-webpack-plugin": "^1.0.1",
     "isomorphic-unfetch": "^3.0.0",
     "moment": "^2.24.0",

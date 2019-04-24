@@ -6,6 +6,6 @@ export const actionTypes = {
   FETCH_LIST_ASYNC,
 };
 
-export default interface IArtistsState {
+export interface IArtistsState {
   artists: SpotifyApi.ArtistObjectFull[];
 }

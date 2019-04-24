@@ -1,4 +1,4 @@
-import IArtistState, { actionTypes } from "./types";
+import { IArtistState, actionTypes } from "./types";
 
 export const exampleInitialState: IArtistState = {
   artist: {},

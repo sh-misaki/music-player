@@ -1,4 +1,4 @@
-import IAlbumsState, { actionTypes } from "./types";
+import { IAlbumsState, actionTypes } from "./types";
 
 export const exampleInitialState: IAlbumsState | {} = {
   album: {},

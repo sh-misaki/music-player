@@ -1,4 +1,4 @@
-import IAlbumsState from "./types";
+import { IAlbumsState } from "./types";
 
 function checkIfAlbumExist( duck: IAlbumsState ) {
   return Object.keys(duck.album).length > 0;

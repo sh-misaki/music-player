@@ -24,11 +24,10 @@ class TopPage extends React.Component<ITopPage> {
     const token = this.props.token || window.location.hash.split("&")[0].split("=")[1];
 
     // cookieにtokenが存在しない場合、設定
-    if (!this.props.token) {document.cookie = `token=${token}`; }
+    if (!this.props.token && token) {document.cookie = `token=${token}`; }
 
     if (!token) {
       window.location.href = "/login";
-      return;
     } else {
       this.props.fetchListAsync(token);
     }
