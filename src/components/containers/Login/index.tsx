@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Wrapper } from "./style";
 
-import Button from "~/components/atoms/Button";
-
 const SCOPE = [
   "user-read-private",
   "user-read-email",
@@ -38,11 +36,9 @@ class Login extends Component {
     }`;
     return (
       <Wrapper>
-        <Button>
-          <a href={soptifyLoginUri}>
-            ログイン
-          </a>
-        </Button>
+        <a href={soptifyLoginUri}>
+          ログイン
+        </a>
       </Wrapper>
     );
   }
