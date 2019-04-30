@@ -5,11 +5,12 @@ import { connect } from "react-redux";
 import Home from "~/components/containers/Home";
 import Main from "~/components/templates/Main";
 
-import { artistsOperations } from "~/stores/modules/artists";
+import { recommendOperations } from "~/stores/modules/recommendations";
+import { IRecommendsState } from "~/stores/modules/recommendations/types";
 
 interface ITopPage {
   token: string;
-  artists: SpotifyApi.ArtistObjectFull[];
+  topStore: IRecommendsState;
   fetchListAsync: (token: string) => {};
 }
 
@@ -17,17 +18,17 @@ class TopPage extends React.Component<ITopPage> {
   protected static async getInitialProps({ctx}: any) {
     const { token } = cookies(ctx);
 
-    let artistsState = { artists: null, };
+    let topStore = {};
     if (token) {
-      await ctx.store.dispatch(artistsOperations.fetchListAsync(
+      await ctx.store.dispatch(recommendOperations.fetchListAsync(
         token as string
       ));
-      artistsState = ctx.store.getState().artistsReducers;
+      topStore = ctx.store.getState().recommendReducers;
     }
 
     return {
       token,
-      artists: artistsState.artists || [],
+      topStore,
     };
   }
 
@@ -48,7 +49,10 @@ class TopPage extends React.Component<ITopPage> {
     return (
       <Main>
         <Home
-          artists={this.props.artists}
+          artists={this.props.topStore.artists}
+          newReleases={this.props.topStore.newReleases}
+          featuredPlaylists={this.props.topStore.featuredPlaylists}
+          recommendTracks={this.props.topStore.recommendTracks}
         />
       </Main>
     );
@@ -59,7 +63,7 @@ const mapStateToProps = () => {
   return {};
 };
 const mapDispatchToProps = (dispatch: any) => ({
-  fetchListAsync: (token: string) => dispatch(artistsOperations.fetchListAsync(token))
+  fetchListAsync: (token: string) => dispatch(recommendOperations.fetchListAsync(token))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopPage);
