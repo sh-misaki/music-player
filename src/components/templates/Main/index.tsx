@@ -2,9 +2,11 @@ import {
   Wrapper,
   SideMenu,
   SideMenuLink,
+  BodyContainer,
 } from "./style";
 import { PropsWithChildren } from "react";
 
+import Typography from "~/components/atoms/Typography";
 const { Link } = require("~/../routes");
 
 const sideMenuLinks = [
@@ -29,15 +31,22 @@ export default ({ children }: PropsWithChildren<IProps>) => (
       {
         sideMenuLinks.map((link, i) => {
           return (
-            <Link route="index">
-              <SideMenuLink key={i}>
-                { link.text }
+            <Link
+              route="index"
+              key={i}
+            >
+              <SideMenuLink>
+                <Typography>
+                  { link.text }
+                </Typography>
               </SideMenuLink>
             </Link>
           );
         })
       }
     </SideMenu>
-    { children }
+    <BodyContainer>
+      { children }
+    </BodyContainer>
   </Wrapper>
 );

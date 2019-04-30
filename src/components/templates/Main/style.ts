@@ -3,18 +3,18 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   display: flex;
   height: 100vh;
-
-  > p {
-    color: white;
-  }
 `;
 
 export const SideMenu = styled.div`
-  background-color: #2e3039;
-  padding: 24px;
+  background-color: #f7f8f7;
+  padding: 32px 24px;
 `;
 
-export const SideMenuLink = styled.p`
-  color: white;
+export const SideMenuLink = styled.div`
   margin-bottom: 8px;
+`;
+
+export const BodyContainer = styled.div`
+  width: calc(100% - 95.5px);
+  background-color: #fcfcfc;
 `;
