@@ -10,5 +10,5 @@ export interface IRecommendsState {
   artists: SpotifyApi.ArtistObjectFull[];
   newReleases: SpotifyApi.AlbumObjectFull[];
   featuredPlaylists: SpotifyApi.PlaylistObjectFull[];
-  recommendTracks: SpotifyApi.TrackObjectSimplified[];
+  recommendTracks: SpotifyApi.TrackObjectFull[];
 }
