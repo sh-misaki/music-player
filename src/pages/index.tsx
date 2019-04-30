@@ -29,19 +29,12 @@ class TopPage extends React.Component<ITopPage> {
       ));
       topStore = ctx.store.getState().recommendReducers;
     }
-    const {
-      artists,
-      newReleases,
-      featuredPlaylists,
-      recommendTracks,
-    } = topStore;
-
     return {
       token,
-      artists,
-      newReleases,
-      featuredPlaylists,
-      recommendTracks,
+      artists: topStore.artists,
+      newReleases: topStore.newReleases,
+      featuredPlaylists: topStore.featuredPlaylists,
+      recommendTracks: topStore.recommendTracks,
     };
   }
 
@@ -74,10 +67,10 @@ class TopPage extends React.Component<ITopPage> {
 
 const mapStateToProps = (store: any) => {
   return {
-    artists: store.recommendReducers.artists,
-    newReleases: store.recommendReducers.newReleases,
-    featuredPlaylists: store.recommendReducers.featuredPlaylists,
-    recommendTracks: store.recommendReducers.recommendTracks,
+    artists: store.recommendReducers.artists || [],
+    newReleases: store.recommendReducers.newReleases || [],
+    featuredPlaylists: store.recommendReducers.featuredPlaylists || [],
+    recommendTracks: store.recommendReducers.recommendTracks || [],
   };
 };
 const mapDispatchToProps = (dispatch: any) => ({
