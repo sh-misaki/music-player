@@ -20,6 +20,7 @@ export const Wrapper = styled.div`
   ), url(${(props: IWrapperProps) => props.backgroundImage});
   background-size: cover;
   padding: 32px 48px;
+  height: 100vh;
 `;
 
 export const Image = styled.div`
