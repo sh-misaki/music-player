@@ -8,9 +8,8 @@ import Main from "~/components/templates/Main";
 import { recommendOperations } from "~/stores/modules/recommendations";
 import { IRecommendsState } from "~/stores/modules/recommendations/types";
 
-interface ITopPage {
+interface ITopPage extends IRecommendsState {
   token: string;
-  topStore: IRecommendsState;
   fetchListAsync: (token: string) => {};
 }
 
@@ -18,17 +17,31 @@ class TopPage extends React.Component<ITopPage> {
   protected static async getInitialProps({ctx}: any) {
     const { token } = cookies(ctx);
 
-    let topStore = {};
+    let topStore = {
+      artists: [],
+      newReleases: [],
+      featuredPlaylists: [],
+      recommendTracks: [],
+    };
     if (token) {
       await ctx.store.dispatch(recommendOperations.fetchListAsync(
         token as string
       ));
       topStore = ctx.store.getState().recommendReducers;
     }
+    const {
+      artists,
+      newReleases,
+      featuredPlaylists,
+      recommendTracks,
+    } = topStore;
 
     return {
       token,
-      topStore,
+      artists,
+      newReleases,
+      featuredPlaylists,
+      recommendTracks,
     };
   }
 
@@ -49,18 +62,23 @@ class TopPage extends React.Component<ITopPage> {
     return (
       <Main>
         <Home
-          artists={this.props.topStore.artists}
-          newReleases={this.props.topStore.newReleases}
-          featuredPlaylists={this.props.topStore.featuredPlaylists}
-          recommendTracks={this.props.topStore.recommendTracks}
+          artists={this.props.artists}
+          newReleases={this.props.newReleases}
+          featuredPlaylists={this.props.featuredPlaylists}
+          recommendTracks={this.props.recommendTracks}
         />
       </Main>
     );
   }
 }
 
-const mapStateToProps = () => {
-  return {};
+const mapStateToProps = (store: any) => {
+  return {
+    artists: store.recommendReducers.artists,
+    newReleases: store.recommendReducers.newReleases,
+    featuredPlaylists: store.recommendReducers.featuredPlaylists,
+    recommendTracks: store.recommendReducers.recommendTracks,
+  };
 };
 const mapDispatchToProps = (dispatch: any) => ({
   fetchListAsync: (token: string) => dispatch(recommendOperations.fetchListAsync(token))
