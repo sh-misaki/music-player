@@ -7,6 +7,7 @@ import {
 
 interface IProps {
   type?: string;
+  color?: string;
 }
 
 class List extends React.Component<IProps> {
@@ -14,6 +15,7 @@ class List extends React.Component<IProps> {
     return (
       <Wrapper
         type={this.props.type}
+        color={this.props.color}
       >
         { this.props.children }
       </Wrapper>

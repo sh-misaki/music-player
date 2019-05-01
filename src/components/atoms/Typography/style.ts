@@ -2,11 +2,14 @@ import styled from "styled-components";
 
 interface IWrapperProps {
   type?: string;
+  color?: string;
 }
 
 export const Wrapper = styled.div`
   font-size: ${(props: IWrapperProps): string => {
     switch (props.type) {
+      case "title":
+        return "64px";
       case "subTitle":
         return "24px";
       case "note":
@@ -24,6 +27,9 @@ export const Wrapper = styled.div`
     }
   }};
   color: ${(props: IWrapperProps): string => {
+    if (!!props.color) {
+      return props.color;
+    }
     switch (props.type) {
       case "note":
         return "#8f868a";
