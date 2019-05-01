@@ -2,21 +2,21 @@ import axios from "axios";
 
 import { actionTypes } from "./types";
 
-const fetchList = (artists: SpotifyApi.ArtistObjectFull[]) => {
+const fetchList = (playlist: SpotifyApi.PlaylistObjectFull) => {
   return {
     type: actionTypes.FETCH_LIST,
-    artists
+    playlist
   };
 };
 
-const fetchListAsync = (token: string) => {
+const fetchListAsync = (token: string, id: string) => {
   return async (dispatch: any) => {
-    const resArtists = await axios({
+    const resPlaylist = await axios({
       headers: { Authorization: `Bearer ${token}`, },
       method: "get",
-      url: `https://api.spotify.com/v1/me/following?type=artist`,
+      url: `https://api.spotify.com/v1/playlists/${id}`,
     });
-    dispatch(fetchList(resArtists.data.artists.items));
+    dispatch(fetchList(resPlaylist.data));
   };
 };
 

@@ -7,6 +7,7 @@ const SCOPE = [
   "user-read-email",
   "user-top-read",
   "user-follow-read",
+  "user-library-read",
 ].join("%20");
 const RESPONSE_TYPE = "token";
 const STATE = "123";

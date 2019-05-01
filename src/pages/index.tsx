@@ -5,11 +5,11 @@ import { connect } from "react-redux";
 import Home from "~/components/containers/Home";
 import Main from "~/components/templates/Main";
 
-import { artistsOperations } from "~/stores/modules/artists";
+import { recommendOperations } from "~/stores/modules/recommendations";
+import { IRecommendsState } from "~/stores/modules/recommendations/types";
 
-interface ITopPage {
+interface ITopPage extends IRecommendsState {
   token: string;
-  artists: SpotifyApi.ArtistObjectFull[];
   fetchListAsync: (token: string) => {};
 }
 
@@ -17,17 +17,24 @@ class TopPage extends React.Component<ITopPage> {
   protected static async getInitialProps({ctx}: any) {
     const { token } = cookies(ctx);
 
-    let artistsState = { artists: null, };
+    let topStore = {
+      artists: [],
+      newReleases: [],
+      featuredPlaylists: [],
+      recommendTracks: [],
+    };
     if (token) {
-      await ctx.store.dispatch(artistsOperations.fetchListAsync(
+      await ctx.store.dispatch(recommendOperations.fetchListAsync(
         token as string
       ));
-      artistsState = ctx.store.getState().artistsReducers;
+      topStore = ctx.store.getState().recommendReducers;
     }
-
     return {
       token,
-      artists: artistsState.artists || [],
+      artists: topStore.artists,
+      newReleases: topStore.newReleases,
+      featuredPlaylists: topStore.featuredPlaylists,
+      recommendTracks: topStore.recommendTracks,
     };
   }
 
@@ -49,17 +56,25 @@ class TopPage extends React.Component<ITopPage> {
       <Main>
         <Home
           artists={this.props.artists}
+          newReleases={this.props.newReleases}
+          featuredPlaylists={this.props.featuredPlaylists}
+          recommendTracks={this.props.recommendTracks}
         />
       </Main>
     );
   }
 }
 
-const mapStateToProps = () => {
-  return {};
+const mapStateToProps = (store: any) => {
+  return {
+    artists: store.recommendReducers.artists || [],
+    newReleases: store.recommendReducers.newReleases || [],
+    featuredPlaylists: store.recommendReducers.featuredPlaylists || [],
+    recommendTracks: store.recommendReducers.recommendTracks || [],
+  };
 };
 const mapDispatchToProps = (dispatch: any) => ({
-  fetchListAsync: (token: string) => dispatch(artistsOperations.fetchListAsync(token))
+  fetchListAsync: (token: string) => dispatch(recommendOperations.fetchListAsync(token))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopPage);

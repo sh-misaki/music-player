@@ -4,7 +4,7 @@ import cookies from "next-cookies";
 import List from "~/components/containers/List";
 import Main from "~/components/templates/Main";
 
-import { artistShowOperations } from "~/stores/modules/artistsShow";
+import { artistShowOperations } from "~/stores/modules/artist";
 
 interface ITopPage {
   artist: SpotifyApi.ArtistObjectFull | any;

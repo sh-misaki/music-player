@@ -1,23 +1,20 @@
 import React from "react";
 import analyze from "rgbaster";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { connect } from "react-redux";
+
 import {
   Wrapper,
-  Image,
   Name,
   Detail,
   PopularityListWrapper,
   PopularityList,
   PopularityListDescription,
-  PopularityListDescriptionName,
-  PopularityListDescriptionArtist,
   TrackListWrapper,
   TrackList,
   TrackImage,
-  Player,
 } from "./style";
+
+import Typography from "~/components/atoms/Typography";
 
 export interface IPageProps {
   title: string;
@@ -29,12 +26,18 @@ export interface IPageState {
   mainColor: string;
   subColor: string;
 }
-
-const xolor = require("xolor");
 const { Link } = require("~/../routes");
+const xolor = require("xolor");
+
+function blackOrWhite(hexcolor: string) {
+  const r = parseInt( hexcolor.substr( 1, 2 ), 16 ) ;
+  const g = parseInt( hexcolor.substr( 3, 2 ), 16 ) ;
+  const b = parseInt( hexcolor.substr( 5, 2 ), 16 ) ;
+  return ( ( ( (r * 299) + (g * 587) + (b * 114) ) / 1000 ) < 128 ) ? "white" : "black" ;
+}
 
 class List extends React.Component<IPageProps, IPageState> {
-  public constructor(props) {
+  public constructor(props: IPageProps) {
     super(props);
     this.state = {
       mainColor: "",
@@ -53,7 +56,7 @@ class List extends React.Component<IPageProps, IPageState> {
   public render() {
     const { title, coverImg, tracks, recommendations } = this.props;
     const { mainColor, subColor } = this.state;
-    const textColor = xolor(mainColor).inverse();
+    const textColor = blackOrWhite(xolor(mainColor).hex);
 
     return (
       <Wrapper
@@ -61,28 +64,40 @@ class List extends React.Component<IPageProps, IPageState> {
         mainColor={mainColor}
         subColor={subColor}
       >
-        <Image>
-          <Name color={textColor}>
+        <Name>
+          <Typography
+            type="title"
+            color={textColor}
+          >
             { title }
-          </Name>
-        </Image>
+          </Typography>
+        </Name>
         <Detail color={textColor}>
           <PopularityListWrapper>
             {
               tracks.map((track, index) => {
-                const minute = Math.floor(track.duration_ms / 1000 / 60);
+                const durationSec = track.duration_ms / 1000;
+                const minute = Math.floor(durationSec / 60);
+                const second = Math.floor(durationSec - minute * 60);
                 return (
                   <PopularityList>
-                    { index }
+                    <Typography color={textColor}>
+                      { index + 1 }
+                    </Typography>
                     <PopularityListDescription>
-                      <PopularityListDescriptionName>
+                      <Typography color={textColor}>
                         { track.name }
-                      </PopularityListDescriptionName>
-                      <PopularityListDescriptionArtist>
+                      </Typography>
+                      <Typography
+                        type="note"
+                        color={textColor}
+                      >
                         { track.artists[0].name }
-                      </PopularityListDescriptionArtist>
+                      </Typography>
                     </PopularityListDescription>
-                    { minute }:{ Math.floor(track.duration_ms / 1000 - minute * 60) }
+                    <Typography color={textColor}>
+                      { minute }:{ second < 10 ? `0${second}` : second }
+                    </Typography>
                   </PopularityList>
                 );
               })
@@ -96,8 +111,13 @@ class List extends React.Component<IPageProps, IPageState> {
                     <Link route="albumsShow" params={{id: album.id}}>
                       <TrackList>
                         <TrackImage src={album.images[1].url}/>
-                        <p>{ album.name }</p>
-                        <p>{ album.release_date.split("-")[0] }</p>
+                        <Typography color={textColor}>{ album.name }</Typography>
+                        <Typography
+                          color={textColor}
+                          type="note"
+                        >
+                          { album.release_date.split("-")[0] }
+                        </Typography>
                       </TrackList>
                     </Link>
                   );
@@ -105,11 +125,6 @@ class List extends React.Component<IPageProps, IPageState> {
               </TrackListWrapper>
             )
           }
-          <Player>
-            <FontAwesomeIcon icon="step-backward" size="2x"/>
-            <FontAwesomeIcon icon="play" size="2x"/>
-            <FontAwesomeIcon icon="step-forward" size="2x"/>
-          </Player>
         </Detail>
       </Wrapper>
     );

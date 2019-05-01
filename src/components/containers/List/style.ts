@@ -20,21 +20,14 @@ export const Wrapper = styled.div`
   ), url(${(props: IWrapperProps) => props.backgroundImage});
   background-size: cover;
   padding: 32px 48px;
+  height: 100vh;
 `;
 
-export const Image = styled.div`
-  position: relative;
-`;
-
-export const Name = styled.span`
-  color: ${(props: ITextProps) => props.color};
-  font-size: 80px;
-  font-weight: bold;
+export const Name = styled.div`
   letter-spacing: .01em;
-  position: absolute;
-  bottom: 30%;
-  left: 5%;
-  line-height: 1.1;
+  display: flex;
+  align-items: center;
+  padding-top: 240px;
 `;
 
 export const Detail = styled.div`
@@ -60,6 +53,11 @@ export const PopularityList = styled.div`
   align-items: center;
   font-size: 13px;
   padding: 4px 0;
+
+  & > div:first-child {
+    min-width: 26px;
+    text-align: right;
+  }
 `;
 
 export const PopularityListDescription = styled.div`
@@ -67,14 +65,6 @@ export const PopularityListDescription = styled.div`
   flex-direction: column;
   flex-grow: 1;
   padding-left: 24px;
-`;
-
-export const PopularityListDescriptionName = styled.p`
-  font-weight: bold;
-`;
-
-export const PopularityListDescriptionArtist = styled.p`
-  font-size: 10px;
 `;
 
 export const TrackListWrapper = styled.div`
@@ -91,14 +81,13 @@ export const TrackListWrapper = styled.div`
 export const TrackList = styled.div`
   width: calc(100% / 3);
   font-size: 12px;
-  padding: 0 16px 16px 0;
+  padding-bottom: 16px;
+
+  :not(:nth-child(3n)) {
+    padding-right: 12px;
+  }
 `;
 
 export const TrackImage = styled.img`
   width: 100%;
-`;
-
-export const Player = styled.div`
-  display: flex;
-  justify-content: space-around;
 `;

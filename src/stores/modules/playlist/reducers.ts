@@ -1,7 +1,7 @@
-import { actionTypes, IArtistsState } from "./types";
+import { IPlaylistState, actionTypes } from "./types";
 
-export const exampleInitialState: IArtistsState = {
-  artists: [],
+export const exampleInitialState: IPlaylistState | {} = {
+  playlist: {},
 };
 
 export default function reducer(state = exampleInitialState, action: any) {
@@ -9,7 +9,7 @@ export default function reducer(state = exampleInitialState, action: any) {
     case actionTypes.FETCH_LIST:
       return {
         ...state,
-        artists: action.artists,
+        playlist: action.playlist,
       };
     default:
       return state;
