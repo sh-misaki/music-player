@@ -1,6 +1,5 @@
 import React from "react";
 import analyze from "rgbaster";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { connect } from "react-redux";
 import {
@@ -16,7 +15,6 @@ import {
   TrackListWrapper,
   TrackList,
   TrackImage,
-  Player,
 } from "./style";
 
 export interface IPageProps {
@@ -34,7 +32,7 @@ const xolor = require("xolor");
 const { Link } = require("~/../routes");
 
 class List extends React.Component<IPageProps, IPageState> {
-  public constructor(props) {
+  public constructor(props: IPageProps) {
     super(props);
     this.state = {
       mainColor: "",
@@ -105,11 +103,6 @@ class List extends React.Component<IPageProps, IPageState> {
               </TrackListWrapper>
             )
           }
-          <Player>
-            <FontAwesomeIcon icon="step-backward" size="2x"/>
-            <FontAwesomeIcon icon="play" size="2x"/>
-            <FontAwesomeIcon icon="step-forward" size="2x"/>
-          </Player>
         </Detail>
       </Wrapper>
     );

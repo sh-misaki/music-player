@@ -98,8 +98,3 @@ export const TrackList = styled.div`
 export const TrackImage = styled.img`
   width: 100%;
 `;
-
-export const Player = styled.div`
-  display: flex;
-  justify-content: space-around;
-`;
