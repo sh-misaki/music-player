@@ -2,6 +2,7 @@ import { IAlbumsState, actionTypes } from "./types";
 
 export const exampleInitialState: IAlbumsState | {} = {
   album: {},
+  artist: {},
 };
 
 export default function reducer(state = exampleInitialState, action: any) {
@@ -10,6 +11,7 @@ export default function reducer(state = exampleInitialState, action: any) {
       return {
         ...state,
         album: action.album,
+        artist: action.artist,
       };
     default:
       return state;
