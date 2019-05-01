@@ -33,7 +33,7 @@ class Top extends React.Component<IRecommendsState> {
             {
               featuredPlaylists.map((playlist, i) => {
                 return (
-                  <Link route="albumsShow" params={{id: playlist.id}}>
+                  <Link route="album" params={{id: playlist.id}}>
                     <PlaylistItem key={i}>
                       <PlaylistItemImage src={playlist.images[0].url}/>
                       <Typography>
@@ -52,7 +52,7 @@ class Top extends React.Component<IRecommendsState> {
             {
               artists.map((artist, i) => {
                 return (
-                  <Link route="artistsShow" params={{id: artist.id}}>
+                  <Link route="artist" params={{id: artist.id}}>
                     <ArtistsList key={i}>
                       <ArtistsListImage src={artist.images[2].url}/>
                       <Typography>
@@ -75,7 +75,7 @@ class Top extends React.Component<IRecommendsState> {
                 recommendTracks.map((track, i) => {
                   return (
                     <Link
-                      route="albumsShow"
+                      route="album"
                       params={{id: track.album.id}}
                       key={i}
                     >
@@ -105,7 +105,7 @@ class Top extends React.Component<IRecommendsState> {
                 newReleases.map((album, i) => {
                   return (
                     <Link
-                      route="albumsShow"
+                      route="album"
                       params={{id: album.id}}
                       key={i}
                     >
