@@ -103,28 +103,24 @@ class List extends React.Component<IPageProps, IPageState> {
               })
             }
           </PopularityListWrapper>
-          {
-            !!recommendations.length && (
-              <TrackListWrapper>
-                { recommendations.map((album) => {
-                  return (
-                    <Link route="albumsShow" params={{id: album.id}}>
-                      <TrackList>
-                        <TrackImage src={album.images[1].url}/>
-                        <Typography color={textColor}>{ album.name }</Typography>
-                        <Typography
-                          color={textColor}
-                          type="note"
-                        >
-                          { album.release_date.split("-")[0] }
-                        </Typography>
-                      </TrackList>
-                    </Link>
-                  );
-                }) }
-              </TrackListWrapper>
-            )
-          }
+          <TrackListWrapper>
+            { recommendations.map((album) => {
+              return (
+                <Link route="album" params={{id: album.id}}>
+                  <TrackList>
+                    <TrackImage src={album.images[1].url}/>
+                    <Typography color={textColor}>{ album.name }</Typography>
+                    <Typography
+                      color={textColor}
+                      type="note"
+                    >
+                      { album.release_date.split("-")[0] }
+                    </Typography>
+                  </TrackList>
+                </Link>
+              );
+            }) }
+          </TrackListWrapper>
         </Detail>
       </Wrapper>
     );
