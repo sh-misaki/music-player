@@ -6,6 +6,7 @@ import thunkMiddleware from "redux-thunk";
 import * as artistShowReducers from "./modules/artist";
 import * as albumReducers from "./modules/album";
 import * as recommendReducers from "./modules/recommendations";
+import * as playlistReducers from "./modules/playlist";
 
 let middleware: any;
 
@@ -20,5 +21,6 @@ export default function configureStore() {
     artistShowReducers: artistShowReducers.default,
     albumReducers: albumReducers.default,
     recommendReducers: recommendReducers.default,
+    playlistReducers: playlistReducers.default,
   }), middleware);
 }

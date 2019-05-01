@@ -53,6 +53,11 @@ export const PopularityList = styled.div`
   align-items: center;
   font-size: 13px;
   padding: 4px 0;
+
+  & > div:first-child {
+    min-width: 26px;
+    text-align: right;
+  }
 `;
 
 export const PopularityListDescription = styled.div`

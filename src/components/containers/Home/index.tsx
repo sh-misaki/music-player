@@ -33,7 +33,7 @@ class Top extends React.Component<IRecommendsState> {
             {
               featuredPlaylists.map((playlist, i) => {
                 return (
-                  <Link route="album" params={{id: playlist.id}}>
+                  <Link route="playlist" params={{id: playlist.id}}>
                     <PlaylistItem key={i}>
                       <PlaylistItemImage src={playlist.images[0].url}/>
                       <Typography>
