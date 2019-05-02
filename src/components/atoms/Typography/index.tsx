@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 
 import {
   Wrapper,
@@ -10,7 +9,7 @@ interface IProps {
   color?: string;
 }
 
-class List extends React.Component<IProps> {
+export default class List extends React.Component<IProps> {
   public render() {
     return (
       <Wrapper
@@ -22,5 +21,3 @@ class List extends React.Component<IProps> {
     );
   }
 }
-
-export default connect((state) => state)(List);

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Wrapper } from "./style";
 
 const SCOPE = [
@@ -21,7 +20,7 @@ interface ISpotifySetting {
   state: string;
 }
 
-class Login extends Component {
+export default class Login extends Component {
   public render() {
     const soptifySettings: ISpotifySetting = {
       client_id: process.env.CLIENT_ID as string,
@@ -44,5 +43,3 @@ class Login extends Component {
     );
   }
 }
-
-export default connect((state) => state)(Login);

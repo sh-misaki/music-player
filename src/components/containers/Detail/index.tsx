@@ -1,6 +1,5 @@
 import React from "react";
 import analyze from "rgbaster";
-import { connect } from "react-redux";
 
 import {
   Wrapper,
@@ -36,7 +35,7 @@ function blackOrWhite(hexcolor: string) {
   return ( ( ( (r * 299) + (g * 587) + (b * 114) ) / 1000 ) < 128 ) ? "white" : "black" ;
 }
 
-class List extends React.Component<IPageProps, IPageState> {
+export default class List extends React.Component<IPageProps, IPageState> {
   public constructor(props: IPageProps) {
     super(props);
     this.state = {
@@ -115,5 +114,3 @@ class List extends React.Component<IPageProps, IPageState> {
     );
   }
 }
-
-export default connect((state) => state)(List);

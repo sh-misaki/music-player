@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 const { Link } = require("../../../../routes");
 
 import Typography from "~/components/atoms/Typography";
@@ -20,7 +19,7 @@ import {
 
 import { IRecommendsState } from "~/stores/modules/recommendations/types";
 
-class Top extends React.Component<IRecommendsState> {
+export default class Top extends React.Component<IRecommendsState> {
   public render() {
     const { artists, recommendTracks, featuredPlaylists, newReleases } = this.props;
     return (
@@ -131,5 +130,3 @@ class Top extends React.Component<IRecommendsState> {
     );
   }
 }
-
-export default connect((state) => state)(Top);
