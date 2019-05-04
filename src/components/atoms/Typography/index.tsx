@@ -1,23 +1,9 @@
 import React from "react";
 
-import {
-  Wrapper,
-} from "./style";
+import { IProps } from "./type";
 
-interface IProps {
-  type?: string;
-  color?: string;
-}
+import { Wrapper, } from "./style";
 
-export default class List extends React.Component<IProps> {
-  public render() {
-    return (
-      <Wrapper
-        type={this.props.type}
-        color={this.props.color}
-      >
-        { this.props.children }
-      </Wrapper>
-    );
-  }
-}
+const List: React.FC<IProps> = (props) => <Wrapper {...props}/>;
+
+export default List;

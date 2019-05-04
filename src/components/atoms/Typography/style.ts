@@ -1,12 +1,8 @@
 import styled from "styled-components";
-
-interface IWrapperProps {
-  type?: string;
-  color?: string;
-}
+import { IProps } from "./type";
 
 export const Wrapper = styled.div`
-  font-size: ${(props: IWrapperProps): string => {
+  font-size: ${(props: IProps): string => {
     switch (props.type) {
       case "title":
         return "64px";
@@ -18,7 +14,7 @@ export const Wrapper = styled.div`
         return "12px";
     }
   }};
-  font-weight: ${(props: IWrapperProps): string => {
+  font-weight: ${(props: IProps): string => {
     switch (props.type) {
       case "note":
         return "100";
@@ -26,7 +22,7 @@ export const Wrapper = styled.div`
         return "bold";
     }
   }};
-  color: ${(props: IWrapperProps): string => {
+  color: ${(props: IProps): string => {
     if (!!props.color) {
       return props.color;
     }
@@ -37,5 +33,5 @@ export const Wrapper = styled.div`
         return "#4b536d";
     }
   }};
-  line-height: ${(props: IWrapperProps): string|number => props.type === "subTitle" ? 1 : "normal"};
+  line-height: ${(props: IProps): string|number => props.type === "subTitle" ? 1 : "normal"};
 `;
