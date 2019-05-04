@@ -1,9 +1,18 @@
 import React from "react";
 
-import { IProps } from "./type";
+import { IProps, } from "./type";
 
 import { Wrapper, } from "./style";
 
-const List: React.FC<IProps> = (props) => <Wrapper {...props}/>;
+export default class Typography extends React.Component<IProps> {
+  public static defaultProps: IProps = {
+    color: "#4b536d",
+    type: "normal"
+  };
 
-export default List;
+  public render() {
+    return (
+      <Wrapper {...this.props}/>
+    );
+  }
+}

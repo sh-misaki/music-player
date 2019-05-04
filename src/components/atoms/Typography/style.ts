@@ -23,14 +23,11 @@ export const Wrapper = styled.div`
     }
   }};
   color: ${(props: IProps): string => {
-    if (!!props.color) {
-      return props.color;
-    }
     switch (props.type) {
       case "note":
         return "#8f868a";
       default:
-        return "#4b536d";
+        return props.color as string;
     }
   }};
   line-height: ${(props: IProps): string|number => props.type === "subTitle" ? 1 : "normal"};
