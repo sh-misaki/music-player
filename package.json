@@ -7,7 +7,7 @@
     "dev": "node server.js",
     "build": "next build ./src",
     "start": "NODE_ENV=production node server.js",
-    "lint": "tslint -c tslint.json 'components/**/*.ts{,x}'",
+    "lint": "tslint -c tslint.json 'src/**/*.ts{,x}'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "pre-commit": [
