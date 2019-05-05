@@ -3,24 +3,15 @@ import styled from "styled-components";
 import { IProps } from "./type";
 
 export const Wrapper = styled.span`
-  top: 0;
-  right: 0;
-  z-index: 1;
-  position: absolute;
   flex-wrap: wrap;
-  font-size: 0.75rem;
-  transform: scale(1) translate(50%, -50%);
+  font-size: 10px;
   box-sizing: border-box;
-  transition: transform 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   align-items: center;
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-weight: 500;
   align-content: center;
   border-radius: 10px;
-  flex-direction: row;
   justify-content: center;
-  transform-origin: 100% 0%;
-  display: flex;
+  display: inline-flex;
   color: #fff;
 
   background-color: ${(props: IProps): string => {
@@ -29,44 +20,24 @@ export const Wrapper = styled.span`
         return "#007bff";
       case "secondary":
         return "#f50057";
+      case "error":
+        return "#f44336";
       default:
         return "#f44336";
     }
   }};
 
-  height: ${(props: IProps): string => {
-    switch (props.variant) {
-      case "dot":
-        return "6px";
-      default:
-        return "20px";
-    }
-  }};
-
-  padding: ${(props: IProps): string => {
-    switch (props.variant) {
-      case "dot":
-        return "0";
-      default:
-        return "0 4px";
-    }
-  }};
-
-  min-width: ${(props: IProps): string => {
-    switch (props.variant) {
-      case "dot":
-        return "6px";
-      default:
-        return "20px";
+  ${(props: IProps): string => {
+    if (props.dot) {
+      return "height: 6px; padding: 0; min-width: 6px;";
+    } else {
+      return "height: 20px; padding: 0 4px; min-width: 20px";
     }
   }};
 
   transform: ${(props: IProps): string => {
-    switch (props.isShow) {
-      case true:
-        return "scale(1) translate(50%, -50%);";
-      default:
-        return "scale(0) translate(50%, -50%);";
-    }
-  }};
+    if (props.isShow) {
+      return "translate(50%, -50%);";
+    } else return "scale(0) translate(50%, -50%);";
+  }}};
 `;

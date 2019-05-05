@@ -1,9 +1,9 @@
 export interface IProps {
   color?: "primary" | "secondary" | "error";
-  variant?: 'dot';
-  badgeContent: number;
-  max: number;
-  showZero?: boolean;
-  invisible?: boolean;
-  isShow?: boolean;
+  dot?: boolean;
+  badgeContent: string;
+  max: string;
+  showZero: boolean;
+  visible: boolean;
+  isShow: boolean;
 }
