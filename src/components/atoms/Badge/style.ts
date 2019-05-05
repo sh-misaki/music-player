@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
-interface IWrapperProps {
-  status?: string;
-  type?: string;
-}
+import { IProps } from "./type";
 
 export const Wrapper = styled.div`
   display: inline-block;
@@ -15,7 +12,7 @@ export const Wrapper = styled.div`
   position: relative;
   color: #fff;
 
-  background-color: ${(props: IWrapperProps): string => {
+  background-color: ${(props: IProps): string => {
     switch (props.status) {
       case "primary":
         return "#007bff";
@@ -33,7 +30,7 @@ export const Wrapper = styled.div`
         return "#007bff";
     }
   }};
-  border-radius: ${(props: IWrapperProps): string => {
+  border-radius: ${(props: IProps): string => {
     switch (props.type) {
       case "pill":
         return "10rem";
