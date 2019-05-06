@@ -4,7 +4,7 @@ import { IProps } from "./type";
 
 import { Wrapper } from "./style";
 
-function checkShow(isShowZero: boolean, text: string, isVisible: boolean) {
+function checkShow(isShowZero: boolean, text: string, isVisible: boolean): boolean {
   if (!isShowZero && text == "0") {
     return false;
   } else if (!isVisible) {
@@ -17,16 +17,16 @@ function checkShow(isShowZero: boolean, text: string, isVisible: boolean) {
 export default class Badge extends React.Component<IProps> {
   public static defaultProps: IProps = {
     color: "primary",
-    badgeContent: "0",
-    max: "99",
+    max: 99,
     visible: true,
     isShow: true,
-    showZero: false
+    showZero: false,
+    children: '0'
   };
 
   public render() {
-    const { badgeContent, max } = this.props;
-    const text = Number(max) <= Number(badgeContent) ? `${max}+` : badgeContent;
+    const { max } = this.props;
+    const text = max <= Number(this.props.children) ? `${max}+` : this.props.children;
     const isShowZero = text == "0" && this.props.showZero;
     const isShow = checkShow(isShowZero, text, this.props.visible);
     return (

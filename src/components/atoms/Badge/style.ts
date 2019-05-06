@@ -11,8 +11,8 @@ export const Wrapper = styled.span`
   align-content: center;
   border-radius: 10px;
   justify-content: center;
-  display: inline-flex;
   color: #fff;
+  transform: translate(50%, -50%);
 
   background-color: ${(props: IProps): string => {
     switch (props.color) {
@@ -35,9 +35,11 @@ export const Wrapper = styled.span`
     }
   }};
 
-  transform: ${(props: IProps): string => {
+  display: ${(props: IProps): string => {
     if (props.isShow) {
-      return "translate(50%, -50%);";
-    } else return "scale(0) translate(50%, -50%);";
+      return "inline-flex;";
+    } else {
+      return "none;";
+    }
   }}};
 `;
